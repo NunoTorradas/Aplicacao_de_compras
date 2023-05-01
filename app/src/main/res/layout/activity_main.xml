@@ -4,36 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".IntroActivity">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="388dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logotipo_para_empresa_de_vendas_e_bolsa_ou_e_commerce" />
 
     <Button
-        android:id="@+id/Registar_btn"
+        android:id="@+id/RegisterBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="goToPage1"
+        android:layout_marginBottom="244dp"
+        android:onClick="Registro"
         android:text="Registar"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="410dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
+        android:onClick="Login"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterBtn"
+        app:layout_constraintVertical_bias="0.188" />
 </androidx.constraintlayout.widget.ConstraintLayout>
