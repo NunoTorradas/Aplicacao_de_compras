@@ -2,6 +2,7 @@ package com.oteusite.aplicaodecomprasandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,11 +36,16 @@ public class RegisterActivity extends AppCompatActivity {
                 if (success) {
                     Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
                     // TODO: Navigate to next screen
+                    Login();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
                 }
                 // TODO: Show success message and navigate to next screen
             }
         });
+    }
+    public void Login(){
+        Intent intent = new Intent(this, activity_login.class);
+        startActivity(intent);
     }
 }

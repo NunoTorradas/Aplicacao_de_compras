@@ -12,6 +12,9 @@
         android:theme="@style/Theme.AplicaçãoDeComprasAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".Main_menu"
+            android:exported="false" />
+        <activity
             android:name=".activity_login"
             android:exported="false" />
         <activity

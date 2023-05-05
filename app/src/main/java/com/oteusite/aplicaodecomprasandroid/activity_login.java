@@ -1,4 +1,5 @@
 package com.oteusite.aplicaodecomprasandroid;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -51,10 +52,15 @@ public class activity_login extends AppCompatActivity {
                 if (cursor.moveToFirst()) {
                     Toast.makeText(activity_login.this, "Login successful!", Toast.LENGTH_SHORT).show();
                     // TODO: Navigate to next screen
+                    MainMenu();
                 } else {
                     Toast.makeText(activity_login.this, "Invalid username or password.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    public void MainMenu(){
+        Intent intent = new Intent(this, Main_menu.class);
+        startActivity(intent);
     }
 }
