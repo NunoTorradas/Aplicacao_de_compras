@@ -1,14 +1,10 @@
 package com.oteusite.aplicaodecomprasandroid;
-
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class activity_login extends AppCompatActivity {
@@ -36,40 +32,18 @@ public class activity_login extends AppCompatActivity {
                 String username = editTextUsername.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-                boolean loginSuccessful = checkLogin(username, password);
-                if (loginSuccessful) {
-                    Toast.makeText(activity_login.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                if (checkCredentials(username, password)) {
                     openMainMenu(username);
                 } else {
-                    Toast.makeText(activity_login.this, "Invalid username or password.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_login.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private boolean checkLogin(String username, String password) {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-
-        String[] projection = {DatabaseHelper.COLUMN_PASSWORD};
-        String selection = DatabaseHelper.COLUMN_USERNAME + " = ?";
-        String[] selectionArgs = {username};
-
-        Cursor cursor = db.query(
-                DatabaseHelper.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
-
-        if (cursor.moveToFirst()) {
-            String storedPassword = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PASSWORD));
-            return password.equals(storedPassword);
-        }
-
-        return false;
+    private boolean checkCredentials(String username, String password) {
+        // Verificar o nome de usuário e a senha na base de dados local
+        return databaseHelper.authenticateUser(username, password);
     }
 
     private void openMainMenu(String username) {

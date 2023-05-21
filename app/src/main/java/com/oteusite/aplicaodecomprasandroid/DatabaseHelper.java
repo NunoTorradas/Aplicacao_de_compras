@@ -1,5 +1,4 @@
 package com.oteusite.aplicaodecomprasandroid;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -42,24 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public User getUserByUsername(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD};
-        String selection = COLUMN_USERNAME + " = ?";
-        String[] selectionArgs = {username};
-        Cursor cursor = db.query(TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-        User user = null;
-        if (cursor.moveToFirst()) {
-            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-            String name = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
-            String password = cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD));
-            user = new User(id, name, password);
-        }
-        cursor.close();
-        return user;
-    }
-
-    public boolean updateUser(String currentUsername, String newUsername, String newPassword) {
+    public boolean updateUser(String username, String newUsername, String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -67,10 +49,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PASSWORD, newPassword);
 
         String selection = COLUMN_USERNAME + " = ?";
-        String[] selectionArgs = {currentUsername};
+        String[] selectionArgs = {username};
 
         int rowsAffected = db.update(TABLE_NAME, values, selection, selectionArgs);
-
         return rowsAffected > 0;
     }
+
+    public boolean checkUserExists(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {COLUMN_USERNAME};
+        String selection = COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
+
+    public boolean authenticateUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {COLUMN_USERNAME};
+        String selection = COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + " = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        boolean authenticated = cursor.getCount() > 0;
+        cursor.close();
+        return authenticated;
+    }
 }
+

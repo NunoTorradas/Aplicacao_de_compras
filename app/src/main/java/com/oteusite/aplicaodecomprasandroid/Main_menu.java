@@ -19,9 +19,11 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         textViewUsername = findViewById(R.id.text_view_menu_username);
 
-        String loggedInUsername = getIntent().getStringExtra("UserName");
-        if (loggedInUsername != null) {
-            textViewUsername.setText(loggedInUsername);
+        // Obter o nome do usuário da intent
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        if (username != null) {
+            textViewUsername.setText(username);
         }
 
         Button buttonModify = findViewById(R.id.button_modify);
@@ -52,8 +54,8 @@ public class Main_menu extends AppCompatActivity {
     private void openModifyActivity() {
         // TODO: Implement your code to open the activity for modifying username or password
 
-            Intent intent = new Intent(this, ModifyActivity.class);
-            startActivity(intent);
+        Intent intent = new Intent(this, ModifyActivity.class);
+        startActivity(intent);
 
         Toast.makeText(this, "Opening Modify Activity", Toast.LENGTH_SHORT).show();
     }

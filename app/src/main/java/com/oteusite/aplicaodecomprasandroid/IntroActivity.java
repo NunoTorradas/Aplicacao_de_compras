@@ -11,7 +11,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void Registro(View view){
+    public void Register(View view){
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
