@@ -1,10 +1,12 @@
 package com.oteusite.aplicaodecomprasandroid;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class activity_login extends AppCompatActivity {
@@ -29,27 +31,27 @@ public class activity_login extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = editTextUsername.getText().toString();
-                String password = editTextPassword.getText().toString();
+                String username = editTextUsername.getText().toString().trim();
+                String password = editTextPassword.getText().toString().trim();
 
-                if (checkCredentials(username, password)) {
-                    openMainMenu(username);
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(activity_login.this, "Username and password are required", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(activity_login.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
+                    if (databaseHelper.authenticateUser(username, password)) {
+                        openMainMenu(username);
+                    } else {
+                        Toast.makeText(activity_login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
-    }
-
-    private boolean checkCredentials(String username, String password) {
-        // Verificar o nome de usuário e a senha na base de dados local
-        return databaseHelper.authenticateUser(username, password);
     }
 
     private void openMainMenu(String username) {
         Intent intent = new Intent(this, Main_menu.class);
         intent.putExtra("username", username);
         startActivity(intent);
+        finish();
     }
 }
 

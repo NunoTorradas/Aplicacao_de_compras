@@ -1,17 +1,17 @@
 package com.oteusite.aplicaodecomprasandroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Main_menu extends AppCompatActivity {
 
     private TextView textViewUsername;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,54 +19,36 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         textViewUsername = findViewById(R.id.text_view_menu_username);
 
-        // Obter o nome do usuário da intent
+        // Obter o nome de usuário do Intent
         Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        if (username != null) {
+        if (intent.hasExtra("username")) {
+            username = intent.getStringExtra("username");
             textViewUsername.setText(username);
         }
 
         Button buttonModify = findViewById(R.id.button_modify);
-        buttonModify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openModifyActivity();
-            }
-        });
+        buttonModify.setOnClickListener(v -> openModifyActivity());
 
         Button buttonShop = findViewById(R.id.button_shop);
-        buttonShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openShopActivity();
-            }
-        });
+        buttonShop.setOnClickListener(v -> openShopActivity());
 
         Button buttonOrders = findViewById(R.id.button_orders);
-        buttonOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showOrders();
-            }
-        });
+        buttonOrders.setOnClickListener(v -> showOrders());
     }
 
     private void openModifyActivity() {
-        // TODO: Implement your code to open the activity for modifying username or password
-
-        Intent intent = new Intent(this, ModifyActivity.class);
-        startActivity(intent);
-
+        // Implemente o código para abrir a atividade de modificação de nome de usuário ou senha
         Toast.makeText(this, "Opening Modify Activity", Toast.LENGTH_SHORT).show();
     }
 
     private void openShopActivity() {
-        // TODO: Implement your code to open the shop activity
+        // Implemente o código para abrir a atividade de compras
         Toast.makeText(this, "Opening Shop Activity", Toast.LENGTH_SHORT).show();
     }
 
     private void showOrders() {
-        // TODO: Implement your code to show the user's orders
+        // Implemente o código para mostrar os pedidos do usuário
         Toast.makeText(this, "Showing Orders", Toast.LENGTH_SHORT).show();
     }
 }
+
