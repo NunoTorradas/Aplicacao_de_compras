@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ModifyActivity">
+    android:padding="16dp">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modificar Dados"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
 
     <EditText
-        android:id="@+id/edit_text_modify_username"
+        android:id="@+id/edit_text_modify_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome de Utilizador"
-        android:inputType="text"/>
+        android:hint="Nome" />
 
     <EditText
-        android:id="@+id/edit_text_modify_password"
+        android:id="@+id/edit_text_modify_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Palavra-passe"
-        android:inputType="textPassword"/>
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/edit_text_modify_morada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Morada" />
 
     <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
+        android:id="@+id/button_modify_save"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar"/>
+        android:text="Guardar Alterações"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>

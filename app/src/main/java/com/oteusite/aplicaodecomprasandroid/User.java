@@ -4,15 +4,14 @@ public class User {
     private String nome;
     private String apelido;
     private String email;
-
     private String password;
-
-    public User(int id, String nome, String apelido, String email, String password) {
+    private  String morada;
+    public User(int id, String nome, String apelido, String email, String password, String morada) {
         this.id = id;
         this.nome = nome;
         this.apelido = apelido;
         this.email = email;
-
+        this.morada = morada;
         this.password = password;
     }
 
@@ -32,9 +31,9 @@ public class User {
         return email;
     }
 
-
-
     public String getPassword() {
         return password;
     }
+
+    public String getMorada() {return  morada; }
 }

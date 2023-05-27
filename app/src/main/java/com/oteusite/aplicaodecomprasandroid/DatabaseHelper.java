@@ -65,7 +65,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return authenticated;
     }
+
+    public User getUser(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NOME, COLUMN_USER_APELIDO, COLUMN_USER_MORADA, COLUMN_USER_EMAIL, COLUMN_USER_PASSWORD};
+        String selection = COLUMN_USER_EMAIL + " = ?";
+        String[] selectionArgs = {email};
+        Cursor cursor = db.query(TABLE_USER, projection, selection, selectionArgs, null, null, null);
+        User user = null;
+        if (cursor.moveToFirst()) {
+            int userId = cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID));
+            String nome = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NOME));
+            String apelido = cursor.getString(cursor.getColumnIndex(COLUMN_USER_APELIDO));
+            String morada = cursor.getString(cursor.getColumnIndex(COLUMN_USER_MORADA));
+            String password = cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD));
+            user = new User(userId, nome, apelido, morada, email, password);
+        }
+        cursor.close();
+        return user;
+    }
+
+    public boolean updateUser(String email, String nome, String morada) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_NOME, nome);
+        values.put(COLUMN_USER_MORADA, morada);
+        String selection = COLUMN_USER_EMAIL + " = ?";
+        String[] selectionArgs = {email};
+        int rowsUpdated = db.update(TABLE_USER, values, selection, selectionArgs);
+        return rowsUpdated > 0;
+    }
+
 }
-
-
-
