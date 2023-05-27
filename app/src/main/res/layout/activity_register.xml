@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".RegisterActivity">
-
-    <EditText
-        android:id="@+id/edit_text_nome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nome" />
-
-    <EditText
-        android:id="@+id/edit_text_apelido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Apelido" />
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/edit_text_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
-
-    <EditText
-        android:id="@+id/edit_text_morada"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Morada" />
+        android:hint="Nome de usuário"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
 
     <EditText
         android:id="@+id/edit_text_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edit_text_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edit_text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edit_text_morada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Morada"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/button_register"

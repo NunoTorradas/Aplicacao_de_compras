@@ -71,10 +71,15 @@ public class Main_menu extends AppCompatActivity {
     }
 
     private void openShopActivity() {
+        Intent intent = new Intent(this, ShopActivity.class);
+
         Toast.makeText(this, "Opening Shop Activity", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 
     private void showOrders() {
+        Intent intent = new Intent(this, OrdersActivity.class);
         Toast.makeText(this, "Showing Orders", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 }

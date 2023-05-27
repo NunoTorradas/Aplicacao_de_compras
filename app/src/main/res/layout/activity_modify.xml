@@ -6,12 +6,20 @@
     android:padding="16dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/text_view_modify_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Modificar Dados"
-        android:textSize="24sp"
-        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
         android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/edit_text_modify_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username" />
 
     <EditText
         android:id="@+id/edit_text_modify_nome"
@@ -31,12 +39,18 @@
         android:layout_height="wrap_content"
         android:hint="Morada" />
 
+    <EditText
+        android:id="@+id/edit_text_modify_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
     <Button
-        android:id="@+id/button_modify_save"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Alterações"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

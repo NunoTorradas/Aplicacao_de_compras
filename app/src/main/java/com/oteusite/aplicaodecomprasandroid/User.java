@@ -1,15 +1,16 @@
 package com.oteusite.aplicaodecomprasandroid;
 public class User {
     private int id;
+    private String username;
     private String nome;
-    private String apelido;
     private String email;
+    private String morada;
     private String password;
-    private  String morada;
-    public User(int id, String nome, String apelido, String email, String password, String morada) {
+
+    public User(int id, String username, String nome, String email, String morada, String password) {
         this.id = id;
+        this.username = username;
         this.nome = nome;
-        this.apelido = apelido;
         this.email = email;
         this.morada = morada;
         this.password = password;
@@ -23,10 +24,6 @@ public class User {
         return nome;
     }
 
-    public String getApelido() {
-        return apelido;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -36,4 +33,7 @@ public class User {
     }
 
     public String getMorada() {return  morada; }
+    public String getUsername() {
+        return username;
+    }
 }
