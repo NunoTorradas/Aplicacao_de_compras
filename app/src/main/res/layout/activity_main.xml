@@ -14,8 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotipo_para_empresa_de_vendas_e_bolsa_ou_e_commerce" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/RegisterBtn"

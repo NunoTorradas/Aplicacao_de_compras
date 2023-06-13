@@ -1,11 +1,16 @@
 package com.oteusite.aplicaodecomprasandroid;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 public class ShopActivity extends AppCompatActivity {
     private ProductDatabaseHelper dbHelper;
+    private ProductAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,28 +19,36 @@ public class ShopActivity extends AppCompatActivity {
 
         dbHelper = new ProductDatabaseHelper(this);
 
-        // Adiciona os produtos
-        addProducts();
+        // Verifica se os produtos já foram adicionados
+        if (dbHelper.getProductsCount() == 0) {
+            // Adiciona os produtos apenas se ainda não foram adicionados
+            addProducts();
+        }
 
-        // Obtém todos os produtos da base de dados
+        // Obtém a referência para o RecyclerView usando o ID correto
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_products);
+
+        // Configurar o RecyclerView com um layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Obtém a lista de produtos da base de dados
         List<Product> productList = dbHelper.getAllProducts();
 
-        // Exibe os nomes dos produtos no Toast
-        StringBuilder sb = new StringBuilder();
-        for (Product product : productList) {
-            sb.append(product.getName()).append("\n");
-        }
-        Toast.makeText(this, sb.toString(), Toast.LENGTH_SHORT).show();
+        // Cria um adapter com a lista de produtos
+        adapter = new ProductAdapter(productList, this);
+
+        // Define o adapter no RecyclerView
+        recyclerView.setAdapter(adapter);
     }
 
     private void addProducts() {
-        Product product1 = new Product(1, "Produto 1", "10.99", "/res/drawable/a1.jpg");
-        Product product2 = new Product(2, "Produto 2", "19.99", "/res/drawable/a2.jpg");
-        Product product3 = new Product(3, "Produto 3", "5.99", "/res/drawable/a3.jpg");
+        Product product1 = new Product(1, "Produto 1", "10.99", "a1");
+        Product product2 = new Product(2, "Produto 2", "19.99", "a2");
+        Product product3 = new Product(3, "Produto 3", "5.99", "a3");
 
         dbHelper.addProduct(product1);
         dbHelper.addProduct(product2);
         dbHelper.addProduct(product3);
     }
 }
-

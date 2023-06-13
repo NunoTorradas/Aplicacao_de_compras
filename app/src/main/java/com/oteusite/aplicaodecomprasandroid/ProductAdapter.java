@@ -1,5 +1,6 @@
 package com.oteusite.aplicaodecomprasandroid;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private List<Product> productList;
+    private Context context;
 
-    public ProductAdapter(List<Product> productList) {
+    public ProductAdapter(List<Product> productList, Context context) {
         this.productList = productList;
+        this.context = context;
     }
 
     @NonNull
@@ -38,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+    public class ProductViewHolder extends RecyclerView.ViewHolder {
         private TextView txtProductName;
         private TextView txtProductPrice;
         private ImageView imgProduct;
@@ -53,10 +56,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         public void bind(Product product) {
             txtProductName.setText(product.getName());
             txtProductPrice.setText(product.getPrice());
-            Glide.with(itemView.getContext())
-                    .load(product.getImagePath())
-                    .placeholder(R.drawable.product_placeholder)
+
+            // Carrega a imagem usando o Glide
+            Glide.with(context)
+                    .load(getImageResource(context, product.getImagePath()))
                     .into(imgProduct);
+        }
+
+        private int getImageResource(Context context, String imageName) {
+            return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
         }
     }
 }
+

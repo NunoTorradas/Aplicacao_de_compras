@@ -7,6 +7,7 @@ public class Product {
     private String imagePath;
 
     public Product(int id, String name, String price, String imagePath) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
@@ -30,5 +31,9 @@ public class Product {
 
     public String getImagePath() {
         return imagePath;
+    }
+    // Método para definir o caminho da imagem do produto
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

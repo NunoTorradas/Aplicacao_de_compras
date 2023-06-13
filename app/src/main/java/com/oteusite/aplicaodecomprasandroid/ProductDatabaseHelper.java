@@ -6,19 +6,21 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProductDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "product_database";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
     private static final String TABLE_PRODUCTS = "products";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_PRICE = "price";
     private static final String COLUMN_IMAGE_PATH = "image_path";
+    private static final String COLUMN_CREATED_AT = "created_at";
+    private static final String COLUMN_UPDATED_AT = "updated_at";
 
     public ProductDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,17 +32,18 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_NAME + " TEXT," +
                 COLUMN_PRICE + " TEXT," +
-                COLUMN_IMAGE_PATH + " TEXT" +
+                COLUMN_IMAGE_PATH + " TEXT," +
+                COLUMN_CREATED_AT + " INTEGER," +
+                COLUMN_UPDATED_AT + " INTEGER" +
                 ")";
         db.execSQL(createTableQuery);
-        Log.d("ProductDatabaseHelper", "onCreate called");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if exists
+        // Drop the existing table
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
-        // Create tables again
+        // Recreate the table
         onCreate(db);
     }
 
@@ -50,6 +53,9 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, product.getName());
         values.put(COLUMN_PRICE, product.getPrice());
         values.put(COLUMN_IMAGE_PATH, product.getImagePath());
+        long currentTime = new Date().getTime();
+        values.put(COLUMN_CREATED_AT, currentTime);
+        values.put(COLUMN_UPDATED_AT, currentTime);
         long id = db.insert(TABLE_PRODUCTS, null, values);
         product.setId((int) id); // Definir o ID gerado para o produto
         db.close();
