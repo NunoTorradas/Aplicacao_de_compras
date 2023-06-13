@@ -19,7 +19,8 @@
         android:id="@+id/edit_text_modify_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username" />
+        android:hint="Username"
+        android:enabled="false" />
 
     <EditText
         android:id="@+id/edit_text_modify_nome"

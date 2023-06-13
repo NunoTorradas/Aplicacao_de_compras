@@ -1,0 +1,3 @@
+<!-- ic_product_placeholder.xml -->
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/product_placeholder" />

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class IntroActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,4 +21,5 @@ public class IntroActivity extends AppCompatActivity {
         Intent intent = new Intent(this, activity_login.class);
         startActivity(intent);
     }
+
 }
