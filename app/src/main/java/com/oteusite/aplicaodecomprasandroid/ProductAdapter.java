@@ -59,13 +59,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             // Carrega a imagem usando o Glide
             Glide.with(context)
-                    .load(getImageResource(context, product.getImagePath()))
+                    .load(product.getImagePath())
                     .into(imgProduct);
-        }
-
-        private int getImageResource(Context context, String imageName) {
-            return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
         }
     }
 }
-

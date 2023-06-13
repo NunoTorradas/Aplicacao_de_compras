@@ -13,6 +13,8 @@ public class Product {
         this.imagePath = imagePath;
     }
 
+    // Getters e setters
+
     public int getId() {
         return id;
     }
@@ -32,7 +34,7 @@ public class Product {
     public String getImagePath() {
         return imagePath;
     }
-    // Método para definir o caminho da imagem do produto
+
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }

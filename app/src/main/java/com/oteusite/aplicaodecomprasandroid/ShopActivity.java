@@ -43,9 +43,9 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void addProducts() {
-        Product product1 = new Product(1, "Produto 1", "10.99", "a1");
-        Product product2 = new Product(2, "Produto 2", "19.99", "a2");
-        Product product3 = new Product(3, "Produto 3", "5.99", "a3");
+        Product product1 = new Product(1, "Produto 1", "10.99", "res/drawable/a1.jpg");
+        Product product2 = new Product(2, "Produto 2", "19.99", "res/drawable/a2.jpg");
+        Product product3 = new Product(3, "Produto 3", "5.99", "res/drawable/a3.jpg");
 
         dbHelper.addProduct(product1);
         dbHelper.addProduct(product2);
