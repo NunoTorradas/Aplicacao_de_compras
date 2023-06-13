@@ -19,19 +19,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2); // Aumente o número da versão para 2
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableQuery = "CREATE TABLE " + TABLE_NAME + " (" +
-                COL_USERNAME + " TEXT PRIMARY KEY," +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COL_USERNAME + " TEXT," +
                 COL_PASSWORD + " TEXT," +
                 COL_NOME + " TEXT," +
                 COL_EMAIL + " TEXT," +
                 COL_MORADA + " TEXT)";
         db.execSQL(createTableQuery);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -66,14 +68,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         int rowsAffected = db.update(TABLE_NAME, values, COL_USERNAME + " = ?", new String[]{username});
 
+        db.close(); // Fechar a conexão com o banco de dados
+
         return rowsAffected > 0;
     }
-
 
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns = {COL_USERNAME, COL_NOME, COL_EMAIL, COL_MORADA};
+        String[] columns = {COL_ID, COL_NOME, COL_EMAIL, COL_MORADA, COL_PASSWORD}; // Incluí COL_PASSWORD na lista de colunas
         String selection = COL_USERNAME + " = ?";
         String[] selectionArgs = {username};
 
@@ -102,8 +105,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         }
 
+        db.close(); // Fechar a conexão com o banco de dados
+
         return user;
     }
+
     public boolean authenticateUser(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
 

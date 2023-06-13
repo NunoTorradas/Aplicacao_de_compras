@@ -1,12 +1,13 @@
 package com.oteusite.aplicaodecomprasandroid;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,13 +54,34 @@ public class ModifyActivity extends AppCompatActivity {
     private void loadUserData(String username) {
         User user = databaseHelper.getUser(username);
         if (user != null) {
-            editTextUsername.setText(user.getUsername());
-            editTextPassword.setText(user.getPassword());
-            editTextNome.setText(user.getNome());
-            editTextEmail.setText(user.getEmail());
-            editTextMorada.setText(user.getMorada());
+            String usernameText = user.getUsername();
+            String passwordText = user.getPassword();
+            String nomeText = user.getNome();
+            String emailText = user.getEmail();
+            String moradaText = user.getMorada();
+
+            if (usernameText != null) {
+                editTextUsername.setText(usernameText);
+            }
+
+            if (passwordText != null) {
+                editTextPassword.setText(passwordText);
+            }
+
+            if (nomeText != null) {
+                editTextNome.setText(nomeText);
+            }
+
+            if (emailText != null) {
+                editTextEmail.setText(emailText);
+            }
+
+            if (moradaText != null) {
+                editTextMorada.setText(moradaText);
+            }
         }
     }
+
 
     private void saveUserData() {
         String password = editTextPassword.getText().toString().trim();
@@ -91,7 +113,7 @@ public class ModifyActivity extends AppCompatActivity {
             return;
         }
 
-        boolean success = databaseHelper.updateUser(username, password, nome, email, morada);
+        boolean success = databaseHelper.updateUser(username, nome, email, morada, password);
 
         if (success) {
             Toast.makeText(this, "Dados atualizados com sucesso", Toast.LENGTH_SHORT).show();
