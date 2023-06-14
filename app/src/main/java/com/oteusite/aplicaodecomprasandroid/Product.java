@@ -4,16 +4,14 @@ public class Product {
     private int id;
     private String name;
     private String price;
-    private String imagePath;
+    private String imageResource;
 
-    public Product(int id, String name, String price, String imagePath) {
+    public Product(int id, String name, String price, String imageResource) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.imagePath = imagePath;
+        this.imageResource = imageResource;
     }
-
-    // Getters e setters
 
     public int getId() {
         return id;
@@ -31,11 +29,8 @@ public class Product {
         return price;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public String getImageResource() {
+        return imageResource;
     }
 }
+

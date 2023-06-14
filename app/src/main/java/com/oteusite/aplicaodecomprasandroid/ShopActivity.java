@@ -52,3 +52,4 @@ public class ShopActivity extends AppCompatActivity {
         dbHelper.addProduct(product3);
     }
 }
+

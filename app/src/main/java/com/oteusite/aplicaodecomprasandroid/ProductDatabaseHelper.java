@@ -1,6 +1,5 @@
 package com.oteusite.aplicaodecomprasandroid;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -52,7 +51,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, product.getName());
         values.put(COLUMN_PRICE, product.getPrice());
-        values.put(COLUMN_IMAGE_PATH, product.getImagePath());
+        values.put(COLUMN_IMAGE_PATH, product.getImageResource());
         long currentTime = new Date().getTime();
         values.put(COLUMN_CREATED_AT, currentTime);
         values.put(COLUMN_UPDATED_AT, currentTime);
@@ -67,10 +66,10 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
-                @SuppressLint("Range") String imagePath = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
+                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
+                String imagePath = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
                 Product product = new Product(id, name, price, imagePath);
                 productList.add(product);
             } while (cursor.moveToNext());

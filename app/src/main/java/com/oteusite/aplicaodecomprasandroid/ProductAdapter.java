@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter {
     private List<Product> productList;
     private Context context;
 
@@ -24,22 +24,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     @NonNull
-    @Override
+   // @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
         return new ProductViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
-        holder.bind(product);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return 0;
     }
+
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
         private TextView txtProductName;
@@ -53,14 +53,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             imgProduct = itemView.findViewById(R.id.img_product);
         }
 
-        public void bind(Product product) {
-            txtProductName.setText(product.getName());
-            txtProductPrice.setText(product.getPrice());
 
-            // Carrega a imagem usando o Glide
-            Glide.with(context)
-                    .load(product.getImagePath())
-                    .into(imgProduct);
-        }
     }
 }
