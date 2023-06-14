@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "447559146685",
+    "project_id": "aplica-de-compras",
+    "storage_bucket": "aplica-de-compras.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447559146685:android:deaad76ad1633a259d2bd4",
+        "android_client_info": {
+          "package_name": "com.oteusite.aplicaodecomprasandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447559146685-0o83brvu6u24n0s8coc821bn4fhpodn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ7EmGNpsiyWuLEooU-7stVJNhJkkYBJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447559146685-0o83brvu6u24n0s8coc821bn4fhpodn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
