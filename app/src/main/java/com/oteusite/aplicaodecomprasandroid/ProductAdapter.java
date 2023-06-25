@@ -1,3 +1,4 @@
+// ProductAdapter.java
 package com.oteusite.aplicaodecomprasandroid;
 
 import android.content.Context;
@@ -39,7 +40,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         // Carregar a imagem usando o Glide
         Glide.with(context)
                 .load(product.getImageResource())
-                .placeholder(R.drawable.a1)
+                .placeholder(R.drawable.default_image) // Coloque um placeholder para exibição enquanto a imagem é carregada
                 .into(holder.imgProduct);
     }
 

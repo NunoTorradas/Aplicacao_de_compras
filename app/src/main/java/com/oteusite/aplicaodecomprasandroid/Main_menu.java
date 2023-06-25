@@ -1,5 +1,6 @@
 package com.oteusite.aplicaodecomprasandroid;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ public class Main_menu extends AppCompatActivity {
     private String username;
     private AlertDialog welcomeDialog;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

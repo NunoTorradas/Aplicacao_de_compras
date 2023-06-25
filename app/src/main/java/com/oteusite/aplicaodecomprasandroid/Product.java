@@ -1,3 +1,4 @@
+// Product.java
 package com.oteusite.aplicaodecomprasandroid;
 
 public class Product {
@@ -32,5 +33,9 @@ public class Product {
     public String getImageResource() {
         return imageResource;
     }
+    public void setImagePath(String imageResource) {
+        this.imageResource = imageResource;
+    }
+
 }
 

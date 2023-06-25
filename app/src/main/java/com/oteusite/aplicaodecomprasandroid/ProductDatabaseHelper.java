@@ -1,11 +1,22 @@
+// ProductDatabaseHelper.java
 package com.oteusite.aplicaodecomprasandroid;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,9 +31,11 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_IMAGE_PATH = "image_path";
     private static final String COLUMN_CREATED_AT = "created_at";
     private static final String COLUMN_UPDATED_AT = "updated_at";
+    private Context context;
 
     public ProductDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -66,10 +79,10 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
-                String imagePath = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
+                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
+                @SuppressLint("Range") String imagePath = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
                 Product product = new Product(id, name, price, imagePath);
                 productList.add(product);
             } while (cursor.moveToNext());
@@ -88,5 +101,77 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return count;
+    }
+
+    public void updateProductImages() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_UPDATED_AT, new Date().getTime());
+        db.update(TABLE_PRODUCTS, values, null, null);
+
+        List<Product> productList = getAllProducts();
+        for (Product product : productList) {
+            new DownloadImageTask(product).execute();
+        }
+        db.close();
+    }
+
+    private class DownloadImageTask extends AsyncTask<Void, Void, String> {
+        private Product product;
+
+        public DownloadImageTask(Product product) {
+            this.product = product;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            return downloadImageAndGetLocalPath(product.getImageResource());
+        }
+
+        @Override
+        protected void onPostExecute(String localImagePath) {
+            super.onPostExecute(localImagePath);
+            if (localImagePath != null) {
+                product.setImagePath(localImagePath);
+                updateProductImagePath(product.getId(), localImagePath);
+            }
+        }
+    }
+
+    private String downloadImageAndGetLocalPath(String imageUrl) {
+        String localImagePath = null;
+
+        try {
+            URL url = new URL(imageUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+
+            InputStream input = connection.getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(input);
+
+            File cacheDir = context.getCacheDir();
+            File imageFile = new File(cacheDir, "product_image_" + System.currentTimeMillis() + ".jpg");
+
+            FileOutputStream output = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+            output.flush();
+            output.close();
+
+            localImagePath = imageFile.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return localImagePath;
+    }
+
+    private void updateProductImagePath(int productId, String imagePath) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IMAGE_PATH, imagePath);
+        values.put(COLUMN_UPDATED_AT, new Date().getTime());
+        db.update(TABLE_PRODUCTS, values, COLUMN_ID + " = ?", new String[]{String.valueOf(productId)});
+        db.close();
     }
 }

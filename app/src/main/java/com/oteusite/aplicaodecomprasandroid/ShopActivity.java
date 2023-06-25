@@ -1,55 +1,48 @@
 package com.oteusite.aplicaodecomprasandroid;
 
+import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ListView;
 
 import java.util.List;
 
-public class ShopActivity extends AppCompatActivity {
-    private ProductDatabaseHelper dbHelper;
-    private ProductAdapter adapter;
+public class ShopActivity extends Activity {
+    private ProductDatabaseHelper databaseHelper;
+    private ListView productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        dbHelper = new ProductDatabaseHelper(this);
+        databaseHelper = new ProductDatabaseHelper(this);
+        productList = findViewById(R.id.product_list);
 
         // Verifica se os produtos já foram adicionados
-        if (dbHelper.getProductsCount() == 0) {
+        if (databaseHelper.getProductsCount() == 0) {
             // Adiciona os produtos apenas se ainda não foram adicionados
             addProducts();
+            // Atualiza as imagens dos produtos
+            databaseHelper.updateProductImages();
         }
 
-        // Obtém a referência para o RecyclerView usando o ID correto
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_products);
+        // Obter a lista de produtos do banco de dados
+        List<Product> products = databaseHelper.getAllProducts();
 
-        // Configurar o RecyclerView com um layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        // Criar um adaptador personalizado para exibir os produtos na ListView
+        ProductListAdapter adapter = new ProductListAdapter(this, products);
 
-        // Obtém a lista de produtos da base de dados
-        List<Product> productList = dbHelper.getAllProducts();
-
-        // Cria um adapter com a lista de produtos
-        adapter = new ProductAdapter(productList, this);
-
-        // Define o adapter no RecyclerView
-        recyclerView.setAdapter(adapter);
+        // Definir o adaptador na ListView
+        productList.setAdapter(adapter);
     }
 
     private void addProducts() {
-        Product product1 = new Product(1, "Produto 1", "10.99", "res/drawable/a1.jpg");
-        Product product2 = new Product(2, "Produto 2", "19.99", "res/drawable/a2.jpg");
-        Product product3 = new Product(3, "Produto 3", "5.99", "res/drawable/a3.jpg");
+        Product product1 = new Product(1, "Produto 1", "10.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw322cd103/images/col/769/7694878-frente.jpg?sw=2000&sh=2000");
+        Product product2 = new Product(2, "Produto 2", "19.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw2065d2d7/images/col/205/2050172-frente.jpg?sw=2000&sh=2000");
+        Product product3 = new Product(3, "Produto 3", "5.99", "https://img.freepik.com/fotos-gratis/respingo-colorido-abstrato-3d-background-generativo-ai-background_60438-2509.jpg");
 
-        dbHelper.addProduct(product1);
-        dbHelper.addProduct(product2);
-        dbHelper.addProduct(product3);
+        databaseHelper.addProduct(product1);
+        databaseHelper.addProduct(product2);
+        databaseHelper.addProduct(product3);
     }
 }
-
