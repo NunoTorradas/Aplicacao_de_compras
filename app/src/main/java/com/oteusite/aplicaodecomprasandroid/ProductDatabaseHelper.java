@@ -31,6 +31,10 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_IMAGE_PATH = "image_path";
     private static final String COLUMN_CREATED_AT = "created_at";
     private static final String COLUMN_UPDATED_AT = "updated_at";
+    private static final String COLUMN_CART_QUANTITY = "cartQuantity"; // Nova coluna para a quantidade no carrinho
+
+
+
     private Context context;
 
     public ProductDatabaseHelper(Context context) {
@@ -46,10 +50,14 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_PRICE + " TEXT," +
                 COLUMN_IMAGE_PATH + " TEXT," +
                 COLUMN_CREATED_AT + " INTEGER," +
-                COLUMN_UPDATED_AT + " INTEGER" +
+                COLUMN_UPDATED_AT + " INTEGER," +
+                COLUMN_CART_QUANTITY + " INTEGER DEFAULT 0" +
                 ")";
         db.execSQL(createTableQuery);
     }
+
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -94,6 +102,8 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         return productList;
     }
 
+
+
     public int getProductsCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS, null);
@@ -132,7 +142,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         protected void onPostExecute(String localImagePath) {
             super.onPostExecute(localImagePath);
             if (localImagePath != null) {
-                product.setImagePath(localImagePath);
+                product.setImageResource(localImagePath);
                 updateProductImagePath(product.getId(), localImagePath);
             }
         }
@@ -174,4 +184,27 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_PRODUCTS, values, COLUMN_ID + " = ?", new String[]{String.valueOf(productId)});
         db.close();
     }
+    public List<Product> getCartProducts() {
+        List<Product> cartProducts = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_CART_QUANTITY + " > 0", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
+                @SuppressLint("Range") String imageResource = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
+
+                Product product = new Product(id, name, price, imageResource);
+                cartProducts.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return cartProducts;
+    }
+
+
+
 }

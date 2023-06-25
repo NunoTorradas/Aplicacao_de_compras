@@ -23,6 +23,11 @@
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         android:src="@drawable/default_image" />
+    <Button
+        android:id="@+id/btn_add_to_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar ao Carrinho" />
 
 
 </LinearLayout>

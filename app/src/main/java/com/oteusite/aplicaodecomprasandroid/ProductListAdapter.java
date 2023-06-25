@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +16,16 @@ import java.util.List;
 public class ProductListAdapter extends BaseAdapter {
     private Context context;
     private List<Product> productList;
+    private OnItemClickListener onItemClickListener;
 
-    public ProductListAdapter(Context context, List<Product> productList) {
+    public interface OnItemClickListener {
+        void onItemClick(Product product);
+    }
+
+    public ProductListAdapter(Context context, List<Product> productList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.productList = productList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -46,6 +53,7 @@ public class ProductListAdapter extends BaseAdapter {
         TextView productNameTextView = convertView.findViewById(R.id.product_name);
         TextView productPriceTextView = convertView.findViewById(R.id.product_price);
         ImageView productImageView = convertView.findViewById(R.id.img_product);
+        Button addToCartButton = convertView.findViewById(R.id.btn_add_to_cart);
 
         Product product = productList.get(position);
         productNameTextView.setText(product.getName());
@@ -58,7 +66,15 @@ public class ProductListAdapter extends BaseAdapter {
                 .error(R.drawable.pag3) // Imagem de erro, caso ocorra algum problema ao carregar a imagem
                 .into(productImageView);
 
+        addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(product);
+                }
+            }
+        });
+
         return convertView;
     }
-
 }
