@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -32,7 +33,7 @@ public class openCartActivity extends AppCompatActivity {
         // Obtenha os dados do carrinho completo da intenção
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            cartProducts = bundle.<Product>getParcelableArrayList("cartProducts");
+            cartProducts = bundle.getParcelableArrayList("cartProducts");
         }
 
         // Inicialize o RecyclerView e o adaptador
@@ -43,12 +44,7 @@ public class openCartActivity extends AppCompatActivity {
 
         // Configure o botão "Finalizar Compra"
         Button buttonFinishPurchase = findViewById(R.id.button_finish_purchase);
-        buttonFinishPurchase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerPurchaseInDatabase();
-            }
-        });
+        buttonFinishPurchase.setOnClickListener(v -> registerPurchaseInDatabase());
     }
 
     private void registerPurchaseInDatabase() {
@@ -82,6 +78,8 @@ public class openCartActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
         dbHelper.close();
+        startActivity(new Intent(this, Main_menu.class));
+
     }
 
     private String getCurrentDate() {

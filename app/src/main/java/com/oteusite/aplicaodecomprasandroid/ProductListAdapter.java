@@ -66,12 +66,9 @@ public class ProductListAdapter extends BaseAdapter {
                 .error(R.drawable.pag3) // Imagem de erro, caso ocorra algum problema ao carregar a imagem
                 .into(productImageView);
 
-        addToCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(product);
-                }
+        addToCartButton.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(product);
             }
         });
 

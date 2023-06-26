@@ -43,12 +43,7 @@ public class ModifyActivity extends AppCompatActivity {
             loadUserData(username);
         }
 
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveUserData();
-            }
-        });
+        buttonSave.setOnClickListener(v -> saveUserData());
     }
 
     private void loadUserData(String username) {

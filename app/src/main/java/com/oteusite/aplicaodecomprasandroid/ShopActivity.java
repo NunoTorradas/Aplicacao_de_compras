@@ -34,12 +34,7 @@ public class ShopActivity extends Activity {
         productList = findViewById(R.id.product_list);
         shoppingCart = new ShoppingCart(); // Inicialize o objeto ShoppingCart
         showCartButton = findViewById(R.id.btn_show_cart);
-        showCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCart();
-            }
-        });
+        showCartButton.setOnClickListener(v -> showCart());
         // Verifica se os produtos já foram adicionados
         if (databaseHelper.getProductsCount() == 0) {
             // Adiciona os produtos apenas se ainda não foram adicionados
@@ -84,21 +79,18 @@ public class ShopActivity extends Activity {
         quantityInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(quantityInput);
 
-        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String quantityString = quantityInput.getText().toString();
-                if (!TextUtils.isEmpty(quantityString)) {
-                    int quantity = Integer.parseInt(quantityString);
-                    if (quantity > 0) {
-                        product.setQuantity(quantity);
-                        addToCartLogic(product);
-                    } else {
-                        Toast.makeText(ShopActivity.this, "Selecione uma quantidade válida", Toast.LENGTH_SHORT).show();
-                    }
+        builder.setPositiveButton("Adicionar", (dialog, which) -> {
+            String quantityString = quantityInput.getText().toString();
+            if (!TextUtils.isEmpty(quantityString)) {
+                int quantity = Integer.parseInt(quantityString);
+                if (quantity > 0) {
+                    product.setQuantity(quantity);
+                    addToCartLogic(product);
                 } else {
-                    Toast.makeText(ShopActivity.this, "Insira uma quantidade válida", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShopActivity.this, "Selecione uma quantidade válida", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(ShopActivity.this, "Insira uma quantidade válida", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,24 +136,19 @@ public class ShopActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Produtos no Carrinho");
         builder.setMessage(sb.toString());
-        builder.setPositiveButton("Ver Carrinho Completo", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                // Obtenha a lista de produtos do carrinho
-                List<Product> cartProducts = shoppingCart.getProducts();
+        builder.setPositiveButton("Ver Carrinho Completo", (dialog, which) -> {
+            dialog.dismiss();
+            // Obtenha a lista de produtos do carrinho
+            List<Product> cartProducts1 = shoppingCart.getProducts();
 
-                // Crie um bundle para passar os dados para a nova atividade
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("cartProducts", (ArrayList<? extends Parcelable>) new ArrayList<Product>(cartProducts));
+            // Crie um bundle para passar os dados para a nova atividade
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("cartProducts", (ArrayList<? extends Parcelable>) new ArrayList<Product>(cartProducts1));
 
-                // Crie uma intenção para abrir a atividade do carrinho completo
-                Intent intent = new Intent(ShopActivity.this, openCartActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-
-
+            // Crie uma intenção para abrir a atividade do carrinho completo
+            Intent intent = new Intent(ShopActivity.this, openCartActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         });
         builder.setNegativeButton("OK", null);
         builder.show();

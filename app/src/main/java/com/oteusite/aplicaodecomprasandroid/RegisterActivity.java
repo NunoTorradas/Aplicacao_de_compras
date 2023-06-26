@@ -33,12 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerUser();
-            }
-        });
+        buttonRegister.setOnClickListener(v -> registerUser());
     }
 
     private void registerUser() {

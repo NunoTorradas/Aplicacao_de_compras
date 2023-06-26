@@ -52,7 +52,7 @@ public class Main_menu extends AppCompatActivity {
         TextView textViewWelcome = dialogView.findViewById(R.id.text_view_welcome);
         Button buttonOk = dialogView.findViewById(R.id.button_ok);
 
-        String welcomeMessage = "Bem-vindo, " + username + "!";
+        String welcomeMessage = "WELCOME, " + username + "!";
         textViewWelcome.setText(welcomeMessage);
 
         welcomeDialog = builder.create();

@@ -9,6 +9,7 @@ public class Product implements Parcelable {
     private String price;
     private String imageResource;
     private int quantity;
+    private int orderId;  // Adicionado o campo orderId
 
     public Product(int id, String name, String price, String imageResource) {
         this.id = id;
@@ -16,6 +17,23 @@ public class Product implements Parcelable {
         this.price = price;
         this.imageResource = imageResource;
     }
+
+    public Product(int id, String name, double price, String imageResource, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.price = String.valueOf(price);
+        this.imageResource = imageResource;
+        this.quantity = quantity;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
 
     public int getId() {
         return id;
@@ -81,4 +99,5 @@ public class Product implements Parcelable {
         imageResource = in.readString();
         quantity = in.readInt();
     }
+
 }

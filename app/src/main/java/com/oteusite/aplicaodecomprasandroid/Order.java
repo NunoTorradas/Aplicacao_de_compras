@@ -1,29 +1,20 @@
 package com.oteusite.aplicaodecomprasandroid;
 
+import java.util.List;
+
 public class Order {
-    private int orderId;
-    private String orderDate;
-    private double orderTotal;
+    private int id;
+    private String date;
+    private List<Product> products;
 
-    public Order(int orderId, String orderDate, String orderTotal) {
-        this.orderId = orderId;
-        this.orderDate = orderDate;
-        this.orderTotal = Double.parseDouble(orderTotal);
+    public Order(int id, String date, List<Product> products) {
+        this.id = id;
+        this.date = date;
+        this.products = products;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getId() {
+        return id;
     }
 
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public double getOrderTotal() {
-        return orderTotal;
-    }
-
-    public void setOrderTotal(double orderTotal) {
-        this.orderTotal = orderTotal;
-    }
 }

@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2); // Aumente o número da versão para 2
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public User getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns = {COL_ID, COL_NOME, COL_EMAIL, COL_MORADA, COL_PASSWORD}; // Incluí COL_PASSWORD na lista de colunas
+        String[] columns = {COL_ID, COL_NOME, COL_EMAIL, COL_MORADA, COL_PASSWORD};
         String selection = COL_USERNAME + " = ?";
         String[] selectionArgs = {username};
 
