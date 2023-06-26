@@ -1,21 +1,13 @@
 package com.oteusite.aplicaodecomprasandroid;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import com.oteusite.aplicaodecomprasandroid.ProductAdapter;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.oteusite.aplicaodecomprasandroid.ProductAdapter;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class OrdersActivity extends AppCompatActivity {
@@ -39,20 +31,17 @@ public class OrdersActivity extends AppCompatActivity {
         adapter.setOrders(orders);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
-                recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Order order = adapter.getItem(position);
-                showOrderDetails(order);
-            }
-        }));
+                recyclerView, (view, position) -> {
+                    Order order = adapter.getItem(position);
+                    showOrderDetails(order);
+                }));
     }
 
     private void showOrderDetails(Order order) {
         List<Product> productList = dbHelper.getProductsByOrderId(order.getId());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(OrdersActivity.this);
-        builder.setTitle("Detalhes do Pedido");
+        builder.setTitle("Order Details");
 
         LayoutInflater inflater = LayoutInflater.from(OrdersActivity.this);
         View dialogView = inflater.inflate(R.layout.dialog_order_details, null);
@@ -62,8 +51,8 @@ public class OrdersActivity extends AppCompatActivity {
         TextView textViewOrderDate = dialogView.findViewById(R.id.textView_orderDate);
         RecyclerView recyclerViewProducts = dialogView.findViewById(R.id.recyclerView_products);
 
-        textViewOrderId.setText("ID do Pedido: " + order.getId());
-        textViewOrderDate.setText("Data do Pedido: " + order.getDate());
+        textViewOrderId.setText("Order ID: " + order.getId());
+        textViewOrderDate.setText("Request Date:" + order.getDate());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(OrdersActivity.this);
         recyclerViewProducts.setLayoutManager(layoutManager);
@@ -73,12 +62,7 @@ public class OrdersActivity extends AppCompatActivity {
             recyclerViewProducts.setAdapter(productAdapter);
         }
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();

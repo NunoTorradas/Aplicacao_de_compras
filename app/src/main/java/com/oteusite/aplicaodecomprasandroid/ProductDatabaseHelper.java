@@ -1,4 +1,3 @@
-// ProductDatabaseHelper.java
 package com.oteusite.aplicaodecomprasandroid;
 
 import android.annotation.SuppressLint;
@@ -10,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -121,7 +119,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
 
         List<Product> productList = getAllProducts();
         for (Product product : productList) {
-            new DownloadImageTask(product).execute();
+            new DownloadImageTask(product);
         }
         db.close();
     }
@@ -184,27 +182,6 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_PRODUCTS, values, COLUMN_ID + " = ?", new String[]{String.valueOf(productId)});
         db.close();
     }
-    public List<Product> getCartProducts() {
-        List<Product> cartProducts = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_CART_QUANTITY + " > 0", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
-                @SuppressLint("Range") String imageResource = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
-
-                Product product = new Product(id, name, price, imageResource);
-                cartProducts.add(product);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        return cartProducts;
-    }
-
 
 
 }

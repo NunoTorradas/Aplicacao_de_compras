@@ -105,7 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         }
 
-        db.close(); // Fechar a conexão com o banco de dados
+        db.close();
 
         return user;
     }

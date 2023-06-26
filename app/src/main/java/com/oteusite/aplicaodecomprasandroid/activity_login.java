@@ -2,7 +2,6 @@ package com.oteusite.aplicaodecomprasandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,20 +27,17 @@ public class activity_login extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = editTextUsername.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
+        buttonLogin.setOnClickListener(v -> {
+            String username = editTextUsername.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
 
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(activity_login.this, "Username and password are required", Toast.LENGTH_SHORT).show();
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(activity_login.this, "Username and password are required", Toast.LENGTH_SHORT).show();
+            } else {
+                if (databaseHelper.authenticateUser(username, password)) {
+                    openMainMenu(username);
                 } else {
-                    if (databaseHelper.authenticateUser(username, password)) {
-                        openMainMenu(username);
-                    } else {
-                        Toast.makeText(activity_login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(activity_login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });

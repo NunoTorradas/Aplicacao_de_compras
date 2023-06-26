@@ -1,7 +1,7 @@
 package com.oteusite.aplicaodecomprasandroid;
+
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -44,31 +44,31 @@ public class RegisterActivity extends AppCompatActivity {
         String morada = editTextMorada.getText().toString().trim();
 
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Por favor, insira um nome de usuário");
+            editTextUsername.setError("Please enter a username");
             editTextUsername.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Por favor, insira uma senha");
+            editTextPassword.setError("Please enter a password");
             editTextPassword.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(nome)) {
-            editTextNome.setError("Por favor, insira o nome");
+            editTextNome.setError("Please enter the name");
             editTextNome.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Por favor, insira o e-mail");
+            editTextEmail.setError("Please enter email");
             editTextEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(morada)) {
-            editTextMorada.setError("Por favor, insira a morada");
+            editTextMorada.setError("Please enter the address");
             editTextMorada.requestFocus();
             return;
         }
@@ -76,10 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
         boolean success = databaseHelper.insertUser(username, password, nome, email, morada);
 
         if (success) {
-            Toast.makeText(this, "Registro bem-sucedido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Successful registration", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(this, "Erro ao registrar o usuário", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error registering user", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -2,9 +2,7 @@ package com.oteusite.aplicaodecomprasandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -85,25 +83,25 @@ public class ModifyActivity extends AppCompatActivity {
         String morada = editTextMorada.getText().toString().trim();
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Por favor, insira uma senha");
+            editTextPassword.setError("Please, insert a Password");
             editTextPassword.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(nome)) {
-            editTextNome.setError("Por favor, insira o nome");
+            editTextNome.setError("Please, insert a Name");
             editTextNome.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Por favor, insira o e-mail");
+            editTextEmail.setError("Please, insert a E-mail");
             editTextEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(morada)) {
-            editTextMorada.setError("Por favor, insira a morada");
+            editTextMorada.setError("Please, insert a adress");
             editTextMorada.requestFocus();
             return;
         }
@@ -111,10 +109,10 @@ public class ModifyActivity extends AppCompatActivity {
         boolean success = databaseHelper.updateUser(username, nome, email, morada, password);
 
         if (success) {
-            Toast.makeText(this, "Dados atualizados com sucesso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Data updated successfully", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(this, "Erro ao atualizar os dados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error updating data", Toast.LENGTH_SHORT).show();
         }
     }
 }

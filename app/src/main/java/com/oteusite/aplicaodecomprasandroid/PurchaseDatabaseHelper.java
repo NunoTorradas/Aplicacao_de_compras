@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +52,7 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Implemente a lógica para atualizar o esquema do banco de dados, se necessário
-        // Aqui você pode adicionar novas tabelas, modificar tabelas existentes, etc.
+
     }
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
@@ -113,7 +111,7 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") String productName = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_NAME));
             @SuppressLint("Range") double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
             @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
-            @SuppressLint("Range") int order_id = cursor.getInt(cursor.getColumnIndex(COLUMN_ORDER_ID)); // Adicionado
+            @SuppressLint("Range") int order_id = cursor.getInt(cursor.getColumnIndex(COLUMN_ORDER_ID));
 
             Product product = new Product(productId, productName, price, "", quantity);
             product.setOrderId(order_id);

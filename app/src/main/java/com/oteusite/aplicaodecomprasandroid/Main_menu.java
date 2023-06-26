@@ -58,12 +58,7 @@ public class Main_menu extends AppCompatActivity {
         welcomeDialog = builder.create();
         welcomeDialog.show();
 
-        buttonOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                welcomeDialog.dismiss();
-            }
-        });
+        buttonOk.setOnClickListener(v -> welcomeDialog.dismiss());
     }
 
     private void openModifyActivity() {

@@ -2,18 +2,15 @@ package com.oteusite.aplicaodecomprasandroid;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,10 +56,10 @@ public class ShopActivity extends Activity {
     }
 
     private void addProducts() {
-        Product product1 = new Product(1, "Produto 1", "10.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw322cd103/images/col/769/7694878-frente.jpg?sw=2000&sh=2000");
-        Product product2 = new Product(2, "Produto 2", "19.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw2065d2d7/images/col/205/2050172-frente.jpg?sw=2000&sh=2000");
-        Product product3 = new Product(3, "Produto 3", "5.99", "https://img.freepik.com/fotos-gratis/respingo-colorido-abstrato-3d-background-generativo-ai-background_60438-2509.jpg");
-        Product product4 = new Product(4, "Prodwewaeawe", "5.99", "https://img.freepik.com/fotos-gratis/respingo-colorido-abstrato-3d-background-generativo-ai-background_60438-2509.jpg");
+        Product product1 = new Product(1, "Bread", "1.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dwb3524f22/images/col/737/7371247-frente.jpg?sw=2000&sh=2000");
+        Product product2 = new Product(2, "Sugar", "0.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw52fd4a99/images/col/503/5038799-frente.jpg?sw=2000&sh=2000");
+        Product product3 = new Product(3, "Salt", "3.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw9f22ef2c/images/col/562/5621031-hero.jpg?sw=2000&sh=2000");
+        Product product4 = new Product(4, "Milk", "7.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw78b27074/images/col/406/4064882-frente.jpg?sw=2000&sh=2000");
 
         databaseHelper.addProduct(product1);
         databaseHelper.addProduct(product2);
@@ -72,14 +69,14 @@ public class ShopActivity extends Activity {
 
     public void addToCart(final Product product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Quantidade");
-        builder.setMessage("Insira a quantidade desejada:");
+        builder.setTitle("Amount");
+        builder.setMessage("Enter the desired quantity:");
 
         final EditText quantityInput = new EditText(this);
         quantityInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(quantityInput);
 
-        builder.setPositiveButton("Adicionar", (dialog, which) -> {
+        builder.setPositiveButton("Add", (dialog, which) -> {
             String quantityString = quantityInput.getText().toString();
             if (!TextUtils.isEmpty(quantityString)) {
                 int quantity = Integer.parseInt(quantityString);
@@ -87,14 +84,14 @@ public class ShopActivity extends Activity {
                     product.setQuantity(quantity);
                     addToCartLogic(product);
                 } else {
-                    Toast.makeText(ShopActivity.this, "Selecione uma quantidade válida", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShopActivity.this, "Select a valid quantity", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(ShopActivity.this, "Insira uma quantidade válida", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShopActivity.this, "Enter a valid quantity", Toast.LENGTH_SHORT).show();
             }
         });
 
-        builder.setNegativeButton("Cancelar", null);
+        builder.setNegativeButton("Cancel", null);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -109,7 +106,7 @@ public class ShopActivity extends Activity {
             shoppingCart.addProduct(product);
         }
 
-        Toast.makeText(this, "Produto adicionado ao carrinho", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Product added to cart", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -127,16 +124,16 @@ public class ShopActivity extends Activity {
             double totalProductPrice = productPrice * quantity;
             totalPrice += totalProductPrice;
 
-            sb.append(product.getName()).append(" - Quantidade: ").append(quantity).append(" - Valor Total: ").append(totalProductPrice).append("\n");
+            sb.append(product.getName()).append(" - Amount: ").append(quantity).append(" - Price: ").append(totalProductPrice).append("\n");
         }
 
-        sb.append("Valor Total da Compra: ").append(totalPrice);
+        sb.append("Total Purchase Amount: ").append(totalPrice);
 
         // Exiba uma caixa de diálogo com os produtos no carrinho e o valor total da compra
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Produtos no Carrinho");
+        builder.setTitle("Products in Cart");
         builder.setMessage(sb.toString());
-        builder.setPositiveButton("Ver Carrinho Completo", (dialog, which) -> {
+        builder.setPositiveButton("View Complete Cart", (dialog, which) -> {
             dialog.dismiss();
             // Obtenha a lista de produtos do carrinho
             List<Product> cartProducts1 = shoppingCart.getProducts();

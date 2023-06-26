@@ -23,6 +23,6 @@
         android:id="@+id/btn_show_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mostrar Carrinho" />
+        android:text="show cart" />
 
 </LinearLayout>

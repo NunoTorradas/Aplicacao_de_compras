@@ -3,16 +3,12 @@ package com.oteusite.aplicaodecomprasandroid;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.UserManager;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -71,9 +67,9 @@ public class openCartActivity extends AppCompatActivity {
 
         String message;
         if (purchaseId != -1) {
-            message = "Encomenda concluída com sucesso!";
+            message = "Order completed successfully!";
         } else {
-            message = "Falha ao concluir a encomenda.";
+            message = "Failed to complete the order.";
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
