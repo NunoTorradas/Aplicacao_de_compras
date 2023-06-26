@@ -76,6 +76,29 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return orders;
     }
+    public List<Product> getProductsByOrderId(int orderId) {
+        List<Product> productList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_NAME_PRODUCTS +
+                " WHERE " + COLUMN_ORDER_ID + " = ?";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(orderId)});
+
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") int productId = cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID));
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_NAME));
+            @SuppressLint("Range") double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
+            @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
+
+            Product product = new Product(productId, name, price, "", quantity);
+            productList.add(product);
+        }
+
+        cursor.close();
+        return productList;
+    }
+
 
     private List<Product> getProductsForOrder(int orderId) {
         List<Product> products = new ArrayList<>();

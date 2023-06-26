@@ -11,10 +11,14 @@ public class Order {
         this.id = id;
         this.date = date;
         this.products = products;
+
     }
 
     public int getId() {
         return id;
     }
 
+    public String getDate() {
+        return date;
+    }
 }
