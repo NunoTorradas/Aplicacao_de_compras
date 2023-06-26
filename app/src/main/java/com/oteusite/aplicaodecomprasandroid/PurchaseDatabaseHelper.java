@@ -21,7 +21,6 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME_ORDERS = "orders";
     public static final String COLUMN_ORDER_ID = "order_id";
-    public static final String COLUMN_USER_ID = "user_id";
     public static final String COLUMN_ORDER_DATE = "order_date";
 
     public PurchaseDatabaseHelper(Context context) {

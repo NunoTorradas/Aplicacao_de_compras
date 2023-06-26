@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aplicacao de compras android</string>
+    <string name="app_name">SWIPE_SHOP</string>
     <string name="main_menu">MAIN MENU</string>
     <string name="textview">TextView</string>
     <string name="title_activity_settings">SettingsActivity</string>
