@@ -150,9 +150,4 @@ public class ShopActivity extends Activity {
         builder.setNegativeButton("OK", null);
         builder.show();
     }
-
-
-
-
-
 }
