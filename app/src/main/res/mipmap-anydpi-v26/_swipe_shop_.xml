@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@color/_swipe_shop__background"/>
-    <foreground android:drawable="@mipmap/_swipe_shop__foreground"/>
-</adaptive-icon>
