@@ -44,7 +44,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private TextView textViewPrice;
         private TextView textViewQuantity;
         private TextView textViewTotal;
-        private TextView textViewDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,9 +52,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             textViewPrice = itemView.findViewById(R.id.textView_price);
             textViewQuantity = itemView.findViewById(R.id.textView_quantity);
             textViewTotal = itemView.findViewById(R.id.textView_total);
-            textViewDescription = itemView.findViewById(R.id.textView_description);
         }
-
 
         public void bind(Product product) {
             // Set the data to the views
@@ -66,8 +63,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .into(imageViewProduct);
             textViewName.setText(product.getName());
             textViewPrice.setText("Price: $" + product.getPrice());
-            textViewDescription.setText("Descricao : $" + product. getDescription());
-
             textViewQuantity.setText("Quantity: " + product.getQuantity());
             double totalProductPrice = Double.parseDouble(product.getPrice()) * product.getQuantity();
             textViewTotal.setText("Total: $" + totalProductPrice);

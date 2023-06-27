@@ -17,5 +17,21 @@ public class ShoppingCart {
     public List<Product> getProducts() {
         return products;
     }
+    public void updateProductQuantity(Product product, int quantity) {
+        for (Product p : products) {
+            if (p.getId() == product.getId()) {
+                p.setQuantity(quantity);
+                return;
+            }
+        }
+    }
 
+    public boolean containsProduct(Product product) {
+        for (Product p : products) {
+            if (p.getId() == product.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

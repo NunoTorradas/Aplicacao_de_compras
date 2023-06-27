@@ -25,8 +25,6 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_PRODUCTS = "products";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_DESCRIPTION = "description";
-
     private static final String COLUMN_PRICE = "price";
     private static final String COLUMN_IMAGE_PATH = "image_path";
     private static final String COLUMN_CREATED_AT = "created_at";
@@ -49,12 +47,10 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NAME + " TEXT," +
                 COLUMN_PRICE + " TEXT," +
                 COLUMN_IMAGE_PATH + " TEXT," +
-                COLUMN_DESCRIPTION + " TEXT," + // Adicione a coluna "description" aqui
                 COLUMN_CREATED_AT + " INTEGER," +
                 COLUMN_UPDATED_AT + " INTEGER," +
                 COLUMN_CART_QUANTITY + " INTEGER DEFAULT 0" +
                 ")";
-
         db.execSQL(createTableQuery);
     }
 
@@ -75,15 +71,13 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, product.getName());
         values.put(COLUMN_PRICE, product.getPrice());
         values.put(COLUMN_IMAGE_PATH, product.getImageResource());
-        values.put(COLUMN_DESCRIPTION, product.getDescription()); // Adicionar a descrição aqui
         long currentTime = new Date().getTime();
         values.put(COLUMN_CREATED_AT, currentTime);
         values.put(COLUMN_UPDATED_AT, currentTime);
         long id = db.insert(TABLE_PRODUCTS, null, values);
-        product.setId((int) id);
+        product.setId((int) id); // Definir o ID gerado para o produto
         db.close();
     }
-
 
     public List<Product> getAllProducts() {
         List<Product> productList = new ArrayList<>();
@@ -95,23 +89,16 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
                 @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
                 @SuppressLint("Range") String imagePath = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
-                @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
-                @SuppressLint("Range") int cartQuantity = cursor.getInt(cursor.getColumnIndex(COLUMN_CART_QUANTITY));
-
-                Product product = new Product(id, name, price, imagePath, description);
-                product.setCartQuantity(cartQuantity);
-
+                Product product = new Product(id, name, price, imagePath);
                 productList.add(product);
             } while (cursor.moveToNext());
         }
-
         if (cursor != null) {
             cursor.close();
         }
         db.close();
         return productList;
     }
-
 
 
 
