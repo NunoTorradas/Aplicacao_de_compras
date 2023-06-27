@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class ProductListAdapter extends BaseAdapter {
@@ -20,10 +21,13 @@ public class ProductListAdapter extends BaseAdapter {
         void onItemClick(Product product);
     }
 
-    public ProductListAdapter(Context context, List<Product> productList, OnItemClickListener onItemClickListener) {
+    public ProductListAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
-        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @Override
@@ -51,22 +55,28 @@ public class ProductListAdapter extends BaseAdapter {
         TextView productNameTextView = convertView.findViewById(R.id.product_name);
         TextView productPriceTextView = convertView.findViewById(R.id.product_price);
         ImageView productImageView = convertView.findViewById(R.id.img_product);
-        Button addToCartButton = convertView.findViewById(R.id.btn_add_to_cart);
+        TextView txtProductDescription = convertView.findViewById(R.id.txt_product_description);
 
         Product product = productList.get(position);
+
         productNameTextView.setText(product.getName());
         productPriceTextView.setText(product.getPrice());
+        txtProductDescription.setText(product.getDescription());
 
-        // Use a biblioteca Glide para carregar e exibir a imagem
+        // Use a library like Glide to load and display the image
         Glide.with(context)
                 .load(product.getImageResource())
-                .placeholder(R.drawable.default_image) // Imagem de placeholder, caso a imagem principal não esteja disponível
-                .error(R.drawable.pag3) // Imagem de erro, caso ocorra algum problema ao carregar a imagem
+                .placeholder(R.drawable.default_image)
+                .error(R.drawable.a1)
                 .into(productImageView);
 
-        addToCartButton.setOnClickListener(v -> {
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(product);
+        // Handle item click event
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(product);
+                }
             }
         });
 

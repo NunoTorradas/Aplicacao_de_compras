@@ -88,7 +88,7 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
             @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
 
-            Product product = new Product(productId, name, price, "", quantity);
+            Product product = new Product(productId, name, String.valueOf(price), "", quantity);
             productList.add(product);
         }
 
@@ -112,7 +112,7 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
             @SuppressLint("Range") int order_id = cursor.getInt(cursor.getColumnIndex(COLUMN_ORDER_ID));
 
-            Product product = new Product(productId, productName, price, "", quantity);
+            Product product = new Product(productId, productName, String.valueOf(price), "", quantity);
             product.setOrderId(order_id);
             products.add(product);
         }
