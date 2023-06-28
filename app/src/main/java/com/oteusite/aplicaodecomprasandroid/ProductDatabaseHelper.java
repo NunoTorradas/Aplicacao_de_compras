@@ -21,12 +21,10 @@ import java.util.List;
 
 public class ProductDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "product_database";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 4;
     private static final String TABLE_PRODUCTS = "products";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_CATEGORY = "category";
-
     private static final String COLUMN_PRICE = "price";
     private static final String COLUMN_IMAGE_PATH = "image_path";
     private static final String COLUMN_CREATED_AT = "created_at";
@@ -47,7 +45,6 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         String createTableQuery = "CREATE TABLE " + TABLE_PRODUCTS + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_NAME + " TEXT," +
-                COLUMN_CATEGORY + " TEXT," +
                 COLUMN_PRICE + " TEXT," +
                 COLUMN_IMAGE_PATH + " TEXT," +
                 COLUMN_CREATED_AT + " INTEGER," +
@@ -56,7 +53,6 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(createTableQuery);
     }
-
 
 
 
@@ -93,9 +89,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
                 @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex(COLUMN_PRICE));
                 @SuppressLint("Range") String imagePath = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH));
-                @SuppressLint("Range") String category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY));
-
-                Product product = new Product(id, name, price, imagePath, category);
+                Product product = new Product(id, name, price, imagePath);
                 productList.add(product);
             } while (cursor.moveToNext());
         }
