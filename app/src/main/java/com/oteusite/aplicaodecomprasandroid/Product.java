@@ -9,6 +9,8 @@ public class Product implements Parcelable {
     private String price;
     private String imageResource;
     private int quantity;
+    private String description;
+
     private int orderId;
 
     public Product(int id, String name, String price, String imageResource) {
@@ -94,6 +96,13 @@ public class Product implements Parcelable {
         price = in.readString();
         imageResource = in.readString();
         quantity = in.readInt();
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

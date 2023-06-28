@@ -47,7 +47,7 @@ public class ProductListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_product, parent, false);
         }
-
+        TextView txtProductDescription = convertView.findViewById(R.id.txt_product_description);
         TextView productNameTextView = convertView.findViewById(R.id.product_name);
         TextView productPriceTextView = convertView.findViewById(R.id.product_price);
         ImageView productImageView = convertView.findViewById(R.id.img_product);
@@ -56,6 +56,8 @@ public class ProductListAdapter extends BaseAdapter {
         Product product = productList.get(position);
         productNameTextView.setText(product.getName());
         productPriceTextView.setText(product.getPrice());
+        txtProductDescription.setText(product.getDescription());
+
 
         // Use a biblioteca Glide para carregar e exibir a imagem
         Glide.with(context)
