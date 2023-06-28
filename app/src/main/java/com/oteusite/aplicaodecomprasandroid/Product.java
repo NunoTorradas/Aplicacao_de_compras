@@ -10,26 +10,20 @@ public class Product implements Parcelable {
     private String imageResource;
     private int quantity;
     private int orderId;
-    private String description;
 
-
-    public Product(int id, String name, String price,String description, String imageResource) {
+    public Product(int id, String name, String price, String imageResource) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.imageResource = imageResource;
-        this.description = description;
-
     }
 
-    public Product(int id, String name, String price, String imageResource, String description) {
+    public Product(int id, String name, double price, String imageResource, int quantity) {
         this.id = id;
         this.name = name;
-        this.price = price;
+        this.price = String.valueOf(price);
         this.imageResource = imageResource;
         this.quantity = quantity;
-        this.description = description;
-
     }
 
     public void setOrderId(int orderId) {
