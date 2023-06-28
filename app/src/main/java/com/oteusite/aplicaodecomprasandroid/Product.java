@@ -9,25 +9,32 @@ public class Product implements Parcelable {
     private String price;
     private String imageResource;
     private int quantity;
-    private String description;
-
     private int orderId;
+    private String category;
 
-    public Product(int id, String name, String price, String imageResource) {
+    public Product(int id, String name, String price, String imageResource, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.imageResource = imageResource;
+        this.category = category;
+
     }
 
-    public Product(int id, String name, double price, String imageResource, int quantity) {
+    public Product(int id, String name, double price, String imageResource, int quantity, String category) {
         this.id = id;
         this.name = name;
         this.price = String.valueOf(price);
         this.imageResource = imageResource;
         this.quantity = quantity;
+        this.category = category;
     }
-
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
@@ -65,6 +72,7 @@ public class Product implements Parcelable {
         this.quantity = quantity;
     }
 
+
     // Implement the Parcelable methods
     @Override
     public int describeContents() {
@@ -96,13 +104,6 @@ public class Product implements Parcelable {
         price = in.readString();
         imageResource = in.readString();
         quantity = in.readInt();
-    }
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 }

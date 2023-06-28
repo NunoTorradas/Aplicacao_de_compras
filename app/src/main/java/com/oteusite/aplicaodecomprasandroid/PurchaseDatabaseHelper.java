@@ -15,6 +15,8 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_PRODUCTS = "products";
     public static final String COLUMN_PRODUCT_ID = "product_id";
     public static final String COLUMN_PRODUCT_NAME = "product_name";
+    public static final String COLUMN_PRODUCT_CATEGORY = "product_category";
+
     public static final String COLUMN_PRICE = "price";
     public static final String COLUMN_QUANTITY = "quantity";
     public static final String COLUMN_TOTAL = "total";
@@ -38,6 +40,7 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
         String createProductsTableQuery = "CREATE TABLE " + TABLE_NAME_PRODUCTS + " (" +
                 COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_PRODUCT_NAME + " TEXT, " +
+                COLUMN_PRODUCT_CATEGORY + " TEXT, " +
                 COLUMN_PRICE + " REAL, " +
                 COLUMN_QUANTITY + " INTEGER, " +
                 COLUMN_ORDER_ID + " INTEGER, " +
@@ -87,8 +90,10 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_NAME));
             @SuppressLint("Range") double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
             @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
+            @SuppressLint("Range") String category = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_CATEGORY));
 
-            Product product = new Product(productId, name, price, "", quantity);
+
+            Product product = new Product(productId, name, price, "", quantity, category);
             productList.add(product);
         }
 
@@ -111,8 +116,10 @@ public class PurchaseDatabaseHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") double price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE));
             @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
             @SuppressLint("Range") int order_id = cursor.getInt(cursor.getColumnIndex(COLUMN_ORDER_ID));
+            @SuppressLint("Range") String category = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_CATEGORY));
 
-            Product product = new Product(productId, productName, price, "", quantity);
+
+            Product product = new Product(productId, productName, price, "", quantity, category);
             product.setOrderId(order_id);
             products.add(product);
         }
