@@ -15,40 +15,14 @@
         android:theme="@style/Theme.AplicaçãoDeComprasAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".openCartActivity"
+            android:name=".RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ShopActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".OrdersActivity"
+            android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".ModifyActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Main_menu"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity_login"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".IntroActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
