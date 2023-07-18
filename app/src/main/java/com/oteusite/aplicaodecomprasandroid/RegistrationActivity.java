@@ -9,14 +9,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class RegistrationActivity extends AppCompatActivity {
     EditText name,email,password;
+    private  FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
         getSupportActionBar().hide();
+        auth = FireBaseAuth.getInstance();
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
