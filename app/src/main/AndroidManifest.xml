@@ -21,7 +21,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".IntroActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
