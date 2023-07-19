@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     android:layout_marginStart="16dp">
 
     <ImageView
-        android:id="@+id/discountImage"
-        android:layout_width="130dp"
-        android:layout_height="70dp"
+        android:id="@+id/categoryImage"
+        android:layout_width="101dp"
+        android:layout_height="99dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/discountberry" />
+        app:srcCompat="@drawable/ic_home_fish" />
 </androidx.constraintlayout.widget.ConstraintLayout>

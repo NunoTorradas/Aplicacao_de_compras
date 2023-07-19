@@ -4,7 +4,7 @@ public class Category {
     Integer id;
     Integer imageurl;
 
-    public DiscountedProducts(Integer id, Integer imageurl) {
+    public Category(Integer id, Integer imageurl) {
         this.id = id;
         this.imageurl = imageurl;
     }
