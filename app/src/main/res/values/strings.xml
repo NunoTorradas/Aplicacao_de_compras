@@ -8,4 +8,5 @@
     <string name="click_to_register">Click to register</string>
     <string name="logout">logout</string>
     <string name="Continue">Continue</string>
+    <string name="shopping_cart">Shopping Cart</string>
 </resources>

@@ -19,17 +19,21 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_show_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        
+    </GridView>
 
     <ImageButton
         android:id="@+id/btn_show_cart"
+
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:background=""
-    android:contentDescription="Shopping Cart"
-    android:src=""
+    android:contentDescription="@string/shopping_cart"
+    android:src="@drawable/shoppingcart"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
 
