@@ -11,25 +11,27 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AplicaçãoDeComprasAndroid"
+        android:theme="@style/Theme.Material3.Light"
         tools:targetApi="31">
         <activity
-            android:name=".RegistrationActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".LoginActivity"
+            android:name=".Register"
+            android:theme="@style/Theme.Material3.Light.NoActionBar"
+
             android:exported="false" />
         <activity
-            android:name=".IntroActivity"
-            android:exported="true"
-            android:launchMode="singleTask">
+            android:name=".Login"
+            android:theme="@style/Theme.Material3.Light.NoActionBar"
+
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
