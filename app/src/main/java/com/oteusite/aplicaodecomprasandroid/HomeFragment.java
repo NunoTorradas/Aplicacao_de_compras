@@ -20,6 +20,9 @@ public class HomeFragment extends Fragment {
     CategoryAdapter categoryAdapter;
     List<CategoryModel> categoryModelList;
 
+    //FireStore
+    FirebaseFirestore db ;
+
     public  HomeFragment(){
 
     }
