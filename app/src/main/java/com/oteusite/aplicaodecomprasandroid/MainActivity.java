@@ -48,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                // Load HomeFragment within the container
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new HomeFragment())
-                        .commit();
+                Intent intent = new Intent(getApplicationContext(), Shop.class);
+                startActivity(intent);
+                finish();
             }
         });
 
