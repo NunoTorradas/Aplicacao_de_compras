@@ -23,7 +23,14 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
 
     Context context;
     List<RecentlyViewed> recentlyViewedList;
-
+    private OnItemClickListener listener;
+    public RecentlyViewedAdapter(Context context, List<RecentlyViewed> recentlyViewedList, OnItemClickListener listener) {
+        // ... (outro código do construtor)
+        this.listener = listener;
+    }
+    public interface OnItemClickListener {
+        void onItemClick(RecentlyViewed product);
+    }
     public RecentlyViewedAdapter(Context context, List<RecentlyViewed> recentlyViewedList) {
         this.context = context;
         this.recentlyViewedList = recentlyViewedList;

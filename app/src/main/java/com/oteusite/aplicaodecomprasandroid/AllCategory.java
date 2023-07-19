@@ -2,7 +2,6 @@ package com.oteusite.aplicaodecomprasandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -29,7 +28,7 @@ public class AllCategory extends AppCompatActivity {
         setContentView(R.layout.activity_all_category);
 
         AllCategoryRecycler = findViewById(R.id.all_category);
-        back = findViewById(R.id.back);
+        back = findViewById(R.id.back2);
 
         back.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -44,15 +43,15 @@ public class AllCategory extends AppCompatActivity {
 
 
         allCategoryModelList = new ArrayList<>();
-        allCategoryModelList.add(new AllCategoryModel(1, R.drawable.ic_fruits));
-        allCategoryModelList.add(new AllCategoryModel(2, R.drawable.ic_veggies));
-        allCategoryModelList.add(new AllCategoryModel(3, R.drawable.ic_meat));
-        allCategoryModelList.add(new AllCategoryModel(4, R.drawable.ic_fish));
-        allCategoryModelList.add(new AllCategoryModel(5, R.drawable.ic_spices));
-        allCategoryModelList.add(new AllCategoryModel(6, R.drawable.ic_egg));
-        allCategoryModelList.add(new AllCategoryModel(7, R.drawable.ic_drink));
-        allCategoryModelList.add(new AllCategoryModel(8, R.drawable.ic_cookies));
-        allCategoryModelList.add(new AllCategoryModel(9, R.drawable.ic_juce));
+        allCategoryModelList.add(new AllCategoryModel(1, R.drawable.ic_fruits, "Fruta"));
+        allCategoryModelList.add(new AllCategoryModel(2, R.drawable.ic_veggies, "Vegetal"));
+        allCategoryModelList.add(new AllCategoryModel(3, R.drawable.ic_meat, "carne"));
+        allCategoryModelList.add(new AllCategoryModel(4, R.drawable.ic_fish, "peixe"));
+        allCategoryModelList.add(new AllCategoryModel(5, R.drawable.ic_spices, "especiarias"));
+        allCategoryModelList.add(new AllCategoryModel(6, R.drawable.ic_egg, "ovos"));
+        allCategoryModelList.add(new AllCategoryModel(7, R.drawable.ic_drink, "bebidas"));
+        allCategoryModelList.add(new AllCategoryModel(8, R.drawable.ic_cookies, "Bolachas"));
+        allCategoryModelList.add(new AllCategoryModel(9, R.drawable.ic_juce, "Sumo"));
 
 
         setCategoryRecycler(allCategoryModelList);

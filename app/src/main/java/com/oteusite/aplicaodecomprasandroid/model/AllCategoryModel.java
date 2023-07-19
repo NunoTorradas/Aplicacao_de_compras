@@ -6,10 +6,12 @@ public class AllCategoryModel extends AppCompatActivity {
 
     Integer id;
     Integer imageurl;
+    String categoryName;
 
-    public AllCategoryModel(Integer id, Integer imageurl) {
+    public AllCategoryModel(Integer id, Integer imageurl, String categoryName) {
         this.id = id;
         this.imageurl = imageurl;
+        this.categoryName = categoryName;
     }
 
     public Integer getId() {
@@ -27,4 +29,13 @@ public class AllCategoryModel extends AppCompatActivity {
     public void setImageurl(Integer imageurl) {
         this.imageurl = imageurl;
     }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
+

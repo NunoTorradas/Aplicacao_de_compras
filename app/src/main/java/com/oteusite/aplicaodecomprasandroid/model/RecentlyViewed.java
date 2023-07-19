@@ -1,7 +1,5 @@
 package com.oteusite.aplicaodecomprasandroid.model;
 
-import android.graphics.drawable.Drawable;
-
 public class RecentlyViewed {
 
     String name;
@@ -11,7 +9,8 @@ public class RecentlyViewed {
     String unit;
     int imageUrl;
     int bigimageurl;
-    public RecentlyViewed(String name, String description, String price, String quantity, String unit, int imageUrl, int bigimageurl) {
+    String category;
+    public RecentlyViewed(String name, String description, String price, String quantity, String unit, int imageUrl, int bigimageurl, String category) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -19,7 +18,16 @@ public class RecentlyViewed {
         this.unit = unit;
         this.imageUrl = imageUrl;
         this.bigimageurl = bigimageurl;
+        this.category = category;
 
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getBigimageurl() {
