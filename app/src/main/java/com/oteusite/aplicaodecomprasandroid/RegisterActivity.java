@@ -1,14 +1,14 @@
 package com.oteusite.aplicaodecomprasandroid;
 
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class RegisterActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextUsername;
     private EditText editTextPassword;

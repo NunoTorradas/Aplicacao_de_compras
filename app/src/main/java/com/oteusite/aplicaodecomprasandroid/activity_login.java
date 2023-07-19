@@ -6,9 +6,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity; // Importe a classe AppCompatActivity aqui
 
-public class activity_login {
+public class activity_login extends AppCompatActivity { // Estenda AppCompatActivity aqui
 
     private EditText editTextUsername;
     private EditText editTextPassword;
@@ -50,5 +50,3 @@ public class activity_login {
         finish();
     }
 }
-
-

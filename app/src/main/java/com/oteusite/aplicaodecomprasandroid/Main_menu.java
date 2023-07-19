@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Main_menu {
+public class Main_menu extends AppCompatActivity {
 
     private TextView textViewUsername;
     private String username;

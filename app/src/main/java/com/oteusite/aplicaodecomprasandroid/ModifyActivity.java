@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ModifyActivity {
+public class ModifyActivity extends AppCompatActivity {
 
     private EditText editTextUsername;
     private EditText editTextPassword;
