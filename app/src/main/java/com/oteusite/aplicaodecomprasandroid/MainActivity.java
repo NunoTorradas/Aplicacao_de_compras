@@ -1,27 +1,17 @@
 package com.oteusite.aplicaodecomprasandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    RecyclerView catRecyclerview;
-
-    //Category recyclerview
-    CategoryAdapter categoryAdapter;
-    List<CategoryModel> categoryModelList;
     FirebaseAuth auth;
     Button button, button1;
     TextView textView;
@@ -58,11 +48,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
-                startActivity(intent);
-                finish();
+                // Load HomeFragment within the container
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new HomeFragment())
+                        .commit();
             }
         });
+
+
     }
 
 }
