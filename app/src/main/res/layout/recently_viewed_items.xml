@@ -7,7 +7,7 @@
     android:layout_marginStart="16dp"
 
     android:layout_height="220dp"
-    android:background="@drawable/card2">
+    android:background="@drawable/default_image">
 
     <TextView
         android:id="@+id/product_name"

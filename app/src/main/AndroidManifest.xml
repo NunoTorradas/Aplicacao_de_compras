@@ -14,11 +14,24 @@
         android:theme="@style/Theme.Material3.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".ProductDetails"
+            android:name=".Main_menu"
             android:exported="false" />
         <activity
-            android:name=".AllCategory"
+            android:name=".ModifyActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity_login"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".openCartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShopActivity"
+            android:exported="true" />
         <activity
             android:name=".IntroActivity"
             android:exported="true">
