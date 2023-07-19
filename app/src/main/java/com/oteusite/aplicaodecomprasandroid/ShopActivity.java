@@ -7,19 +7,21 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopActivity extends Activity {
     private ProductDatabaseHelper databaseHelper;
-    private ListView productList;
+    private GridView productGrid;
+
     private ShoppingCart shoppingCart;
 
-    private Button showCartButton;
+    private ImageView showCartButton;
 
 
     @Override
@@ -28,7 +30,7 @@ public class ShopActivity extends Activity {
         setContentView(R.layout.activity_shop);
 
         databaseHelper = new ProductDatabaseHelper(this);
-        productList = findViewById(R.id.product_list);
+        productGrid = findViewById(R.id.product_grid);
         shoppingCart = new ShoppingCart(); // Inicialize o objeto ShoppingCart
         showCartButton = findViewById(R.id.btn_show_cart);
         showCartButton.setOnClickListener(v -> showCart());
@@ -42,18 +44,9 @@ public class ShopActivity extends Activity {
 
         // Obter a lista de produtos do banco de dados
         List<Product> products = databaseHelper.getAllProducts();
-
-        // Criar um adaptador personalizado para exibir os produtos na ListView
-        ProductListAdapter adapter = new ProductListAdapter(this, products, new ProductListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Product product) {
-                addToCart(product);
-            }
-        });
-
-        // Definir o adaptador na ListView
-        productList.setAdapter(adapter);
     }
+
+
 
     private void addProducts() {
         Product product1 = new Product(1, "Bread", "1.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dwb3524f22/images/col/737/7371247-frente.jpg?sw=2000&sh=2000");
@@ -65,6 +58,15 @@ public class ShopActivity extends Activity {
         databaseHelper.addProduct(product2);
         databaseHelper.addProduct(product3);
         databaseHelper.addProduct(product4);
+        Product product5 = new Product(5, "Bread", "1.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dwb3524f22/images/col/737/7371247-frente.jpg?sw=2000&sh=2000");
+        Product product6 = new Product(6, "Sugar", "0.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw52fd4a99/images/col/503/5038799-frente.jpg?sw=2000&sh=2000");
+        Product product7 = new Product(7, "Salt", "3.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw9f22ef2c/images/col/562/5621031-hero.jpg?sw=2000&sh=2000");
+        Product product8 = new Product(8, "Milk", "7.99", "https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw78b27074/images/col/406/4064882-frente.jpg?sw=2000&sh=2000");
+
+        databaseHelper.addProduct(product5);
+        databaseHelper.addProduct(product6);
+        databaseHelper.addProduct(product7);
+        databaseHelper.addProduct(product8);
     }
 
     public void addToCart(final Product product) {
@@ -150,9 +152,4 @@ public class ShopActivity extends Activity {
         builder.setNegativeButton("OK", null);
         builder.show();
     }
-
-
-
-
-
 }
