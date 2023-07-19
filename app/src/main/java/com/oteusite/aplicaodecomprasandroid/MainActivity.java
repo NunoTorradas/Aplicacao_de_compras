@@ -1,6 +1,7 @@
 package com.oteusite.aplicaodecomprasandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +12,18 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
+
+    RecyclerView catRecyclerview;
+
+    //Category recyclerview
+    CategoryAdapter categoryAdapter;
+    List<CategoryModel> categoryModelList;
     FirebaseAuth auth;
-    Button button;
+    Button button, button1;
     TextView textView;
     FirebaseUser user;
 
@@ -22,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         auth= FirebaseAuth.getInstance();
         button = findViewById(R.id.logout);
+        button1 = findViewById(R.id.cont);
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         if (user == null){
@@ -45,5 +54,15 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
 }
